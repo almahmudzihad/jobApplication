@@ -7,19 +7,23 @@ let total = document.getElementById("total");
 let interviewCount = document.getElementById("interview");
 let rejectedCount = document.getElementById("rejected");
 let allcard = document.getElementById("job-list");
+let mainContainer = document.querySelector("main");
+const filteredJobsContainer = document.getElementById("filtered-jobs");
 
 // no job message allcard.classList.contains("hidden")
 const fallbackMessage = document.getElementById("no-jobs-message");
 function showNoJobsMessage() {
-    if(allcard.classList.contains("hidden")) {
+    const joballcard =  allcard.classList.contains("hidden") || allcard.children.length === 0;
+    const filtcard =  filteredJobsContainer.classList.contains("hidden") || filteredJobsContainer.children.length === 0;
+    if(joballcard && filtcard)  {
         fallbackMessage.classList.remove("hidden");
     }else{
         fallbackMessage.classList.add("hidden");    
     }
         
-    }
+}
 
-showNoJobsMessage();
+
 
 
 function totaljob() {
@@ -70,9 +74,10 @@ function activeBtn(id) {
 
 
 // new element push in interview and rejected array and display in the dom
-let mainContainer = document.querySelector("main");
+
 
 mainContainer.addEventListener("click", function(event) {
+    showNoJobsMessage();
     if (event.target.classList.contains("card-interview-btn")) { //interview button click 1
         const parentNode = event.target.parentNode.parentNode;
 
@@ -139,11 +144,12 @@ mainContainer.addEventListener("click", function(event) {
     interview = interview.filter(job => job.cardName != cardInfo.cardName);
    
         totaljob();
+        
 }
     
 });
 
-const filteredJobsContainer = document.getElementById("filtered-jobs");
+
 function displayFilteredJobs(jobs) {
     filteredJobsContainer.innerHTML = "";  
     for (const job of jobs) {
