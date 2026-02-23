@@ -9,6 +9,7 @@ let rejectedCount = document.getElementById("rejected");
 let allcard = document.getElementById("job-list");
 let mainContainer = document.querySelector("main");
 const filteredJobsContainer = document.getElementById("filtered-jobs");
+const jobCountElement = document.getElementById("job-count");
 
 // no job message allcard.classList.contains("hidden")
 const fallbackMessage = document.getElementById("no-jobs-message");
@@ -28,6 +29,7 @@ function showNoJobsMessage() {
 
 function totaljob() {
     total.innerText = allcard.children.length;
+    jobCountElement.innerText = allcard.children.length;
     interviewCount.innerText = interview.length;
     rejectedCount.innerText = rejected.length;
 }
