@@ -4,18 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Job Application Tracker</title>
-    
 
     <!-- tailwindcss -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
-    <!-- google fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
-      rel="stylesheet"
-    />
 
     <!-- font awesome cdn -->
     <link
@@ -25,11 +16,6 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <style>
-      body {
-        font-family: "Manrope", sans-serif;
-      }
-    </style>
   </head>
   <body class="bg-[#F8FAFC]">
     <header class="container mx-auto">
@@ -40,7 +26,7 @@
       </h1>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div class="bg-white p-4">
-          <p class=" font-bold">Total</p>
+          <p class="font-bold">Total</p>
           <p id="total" class="text-2xl font-bold">0</p>
         </div>
         <div class="bg-white p-4">
@@ -59,66 +45,80 @@
         <p class="font-bold">8 Jobs</p>
       </div>
       <div class="space-x-4">
-        <button id="all-btn" onclick="activeBtn('all-btn')"
-          class="bg-blue-500  text-white font-bold py-2 px-4 rounded"
+        <button
+          id="all-btn"
+          onclick="activeBtn('all-btn')"
+          class="bg-blue-500 text-white font-bold py-2 px-4 rounded"
         >
           All
         </button>
-        <button id="interview-btn" onclick="activeBtn('interview-btn')"
-          class=" bg-white font-bold py-2 px-4 rounded"
+        <button
+          id="interview-btn"
+          onclick="activeBtn('interview-btn')"
+          class="bg-white font-bold py-2 px-4 rounded"
         >
           Interview
         </button>
-        <button id="rejected-btn" onclick="activeBtn('rejected-btn')"
+        <button
+          id="rejected-btn"
+          onclick="activeBtn('rejected-btn')"
           class="bg-white font-bold py-2 px-4"
         >
           Rejected
         </button>
       </div>
-      <section id="filtered-jobs" class="hidden">
+      <!-- filetered jobs section -->
+      <section id="filtered-jobs" class="hidden"></section>
 
-      </section>
+      <!-- job list container -->
       <div id="job-list">
-
         <!-- job item 1 -->
-        <div class="bg-white p-4 my-4 space-y-4 flex flex-col md:flex-row md:justify-between" >
+        <div
+          class="bg-white p-4 my-4 space-y-4 flex flex-col md:flex-row md:justify-between"
+        >
           <div class="space-y-4">
-            <h2 class="card-name text-xl font-bold">Mobile First Crop</h2>
-          <p class=" card-job text-gray-500">React Native Developer</p>
-          <p class="card-salary text-gray-500">Remote • Full-time • $130,000 - $175,000</p>
-          <button
-            class="card-status bg-[#EEF4FF] font-bold py-2 px-4 "
-          >Not Applied</button>
-          <p class=" card-description to-gray-600">Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.</p>
-          <button class="card-interview-btn text-green-500 font-bold py-2 px-4 rounded border border-green-500">INTERVIEW</button>
-          <button class="card-rejected-btn text-red-500 font-bold py-2 px-4 border-red-500 border rounded ml-2">REJECTED</button>
-
+            <div>
+              <h2 class="card-name text-2xl font-bold text-[#002C5C]">Mobile First Crop</h2>
+              <p class="card-job text-gray-500 text-xl mt-1">React Native Developer</p>
+            </div>
+            
+            <p class="card-salary text-gray-500">
+              Remote • Full-time • $130,000 - $175,000
+            </p>
+            <button class="card-status bg-[#EEF4FF] font-bold py-2 px-4">
+              Not Applied
+            </button>
+            <p class="card-description to-gray-600">
+              Build cross-platform mobile applications using React Native. Work
+              on products used by millions of users worldwide.
+            </p>
+            <button
+              class="card-interview-btn text-green-500 font-bold py-2 px-4 rounded border border-green-500"
+            >
+              INTERVIEW
+            </button>
+            <button
+              class="card-rejected-btn text-red-500 font-bold py-2 px-4 border-red-500 border rounded ml-2"
+            >
+              REJECTED
+            </button>
           </div>
           <div>
-            <button class="card-delete-btn text-gray-300 border rounded-full p-2 w-12 h-12 border-gray-300"><i class="fa-solid fa-trash-can"></i></button>
+            <button
+              class="card-delete-btn text-gray-300 border rounded-full p-2 w-12 h-12 border-gray-300 cursor-pointer hover:text-red-300 hover:border-red-400"
+            >
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
           </div>
-          
         </div>
         <!-- job item 2 -->
-       <div class="bg-white p-4 my-4 space-y-4 flex flex-col md:flex-row md:justify-between" >
-          <div class="space-y-4">
-            <h2 class="card-name text-xl font-bold">Tech Innovations Inc.</h2>
-          <p class=" card-job text-gray-500">Frontend Developer</p>
-          <p class="card-salary text-gray-500">Remote • Full-time • $130,000 - $175,000</p>
-          <button
-            class="card-status bg-[#EEF4FF] font-bold py-2 px-4 "
-          >Not Applied</button>
-          <p class=" card-description to-gray-600">Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.</p>
-          <button class="card-interview-btn text-green-500 font-bold py-2 px-4 rounded border border-green-500 ">INTERVIEW</button>
-          <button class="card-rejected-btn text-red-500 font-bold py-2 px-4 border-red-500 border rounded ml-2">REJECTED</button>
+      </div>
 
-          </div>
-          <div>
-            <button class="card-delete-btn text-gray-300 border rounded-full p-2 w-12 h-12 border-gray-300"><i class="fa-solid fa-trash-can"></i></button>
-          </div>
-          
-        </div>
-
+      <!-- fallback message for no job -->
+      <div id="no-jobs-message" class="bg-white text-center py-8 hidden">
+        <img src="jobs.png" alt="no jobs" class="mx-auto mb-4 w-32" />
+        <p class="text-[#002C5C] text-2xl font-bold">No jobs available</p>
+        <p class="text-gray-500 pt-1">Check back soon for new opportunities.</p>
       </div>
     </main>
 

@@ -8,6 +8,19 @@ let interviewCount = document.getElementById("interview");
 let rejectedCount = document.getElementById("rejected");
 let allcard = document.getElementById("job-list");
 
+// no job message allcard.classList.contains("hidden")
+const fallbackMessage = document.getElementById("no-jobs-message");
+function showNoJobsMessage() {
+    if(allcard.classList.contains("hidden")) {
+        fallbackMessage.classList.remove("hidden");
+    }else{
+        fallbackMessage.classList.add("hidden");    
+    }
+        
+    }
+
+showNoJobsMessage();
+
 
 function totaljob() {
     total.innerText = allcard.children.length;
@@ -51,6 +64,7 @@ function activeBtn(id) {
         document.getElementById("filtered-jobs").classList.remove("hidden");
         displayRejectedJobs(rejected);
     }
+    showNoJobsMessage();
 
 }
 
@@ -173,3 +187,6 @@ function displayRejectedJobs(jobs) {
         `;
         filteredJobsContainer.appendChild(jobElement);
     }};
+
+
+
