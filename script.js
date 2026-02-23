@@ -10,6 +10,19 @@ let allcard = document.getElementById("job-list");
 let mainContainer = document.querySelector("main");
 const filteredJobsContainer = document.getElementById("filtered-jobs");
 const jobCountElement = document.getElementById("job-count");
+const deleteButtons = document.querySelectorAll(".card-delete-btn");
+
+// delete button
+
+for (const deleteButton of deleteButtons) {
+    deleteButton.addEventListener("click", function() {
+      
+      this.parentElement.parentElement.remove();
+      totaljob()
+    }
+    )
+    
+};
 
 // no job message allcard.classList.contains("hidden")
 const fallbackMessage = document.getElementById("no-jobs-message");
@@ -194,7 +207,14 @@ function displayRejectedJobs(jobs) {
             </div>  
         `;
         filteredJobsContainer.appendChild(jobElement);
-    }};
+    }
+};
 
 
 
+filteredJobsContainer.addEventListener("click", function(e){
+    if(e.target.classList.contains("card-delete-btn")){
+        
+        e.target.parentElement.parentElement.remove()
+    }
+})
