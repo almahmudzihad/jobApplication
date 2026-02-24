@@ -1,6 +1,6 @@
 let interview = [];
 let rejected = [];
-let currentStatus = "Not Applied";
+let currentStatus = 'all';
 
 
 let total = document.getElementById("total");
@@ -38,15 +38,26 @@ function showNoJobsMessage() {
 }
 
 
-
-
 function totaljob() {
     total.innerText = allcard.children.length;
-    jobCountElement.innerText = allcard.children.length;
+    //jobCountElement.innerText = allcard.children.length;
     interviewCount.innerText = interview.length;
     rejectedCount.innerText = rejected.length;
 }
 totaljob();
+
+//fild count job function
+function updatetotal(){
+    let total = 0;
+    if(!allcard.classList.contains("hidden")){
+        total += allcard.children.length
+    }
+    if(!filteredJobsContainer.classList.contains("hidden")){
+        total += filteredJobsContainer.children.length;
+    }
+    jobCountElement.innerText = total;
+}
+updatetotal();
 
 // button toggle class function
 function activeBtn(id) {
@@ -66,6 +77,7 @@ function activeBtn(id) {
 
     theBtn = document.getElementById(id);
     currentStatus = id;
+    console.log(currentStatus)
 
     theBtn.classList.add("bg-blue-500", "text-white");
     theBtn.classList.remove("bg-white", "text-black");
@@ -75,6 +87,7 @@ function activeBtn(id) {
         allcard.classList.add("hidden");
         document.getElementById("filtered-jobs").classList.remove("hidden");
          displayFilteredJobs(interview);
+         
     }else if (id === 'all-btn') {
         document.getElementById("filtered-jobs").classList.add("hidden");
         allcard.classList.remove("hidden");
@@ -82,8 +95,10 @@ function activeBtn(id) {
         allcard.classList.add("hidden");
         document.getElementById("filtered-jobs").classList.remove("hidden");
         displayRejectedJobs(rejected);
+        
     }
     showNoJobsMessage();
+    updatetotal();
 
 }
 
@@ -93,6 +108,7 @@ function activeBtn(id) {
 
 mainContainer.addEventListener("click", function(event) {
     showNoJobsMessage();
+    
     if (event.target.classList.contains("card-interview-btn")) { //interview button click 1
         const parentNode = event.target.parentNode.parentNode;
 
@@ -125,9 +141,13 @@ mainContainer.addEventListener("click", function(event) {
         
    } 
     rejected = rejected.filter(job => job.cardName != cardInfo.cardName);
+    if(currentStatus == 'rejected-btn'){
+        displayRejectedJobs(rejected);//onchnge
+    }
+    
     totaljob();
-}
-   else if (event.target.classList.contains("card-rejected-btn")) { //rejected button click
+    }
+    else if (event.target.classList.contains("card-rejected-btn")) { //rejected button click
         const parentNode = event.target.parentNode.parentNode;
 
     const cardName = parentNode.querySelector(".card-name").innerText;
@@ -157,11 +177,14 @@ mainContainer.addEventListener("click", function(event) {
         rejected.push(cardInfo);
    } 
     interview = interview.filter(job => job.cardName != cardInfo.cardName);
+    if(currentStatus == 'interview-btn'){
+        displayFilteredJobs(interview)
+    }
+   
    
         totaljob();
         
-}
-    
+    }
 });
 
 
@@ -172,8 +195,8 @@ function displayFilteredJobs(jobs) {
         jobElement.classList.add("bg-white", "p-4", "my-4", "space-y-4", "flex", "flex-col", "md:flex-row", "md:justify-between");
         jobElement.innerHTML = `
             <div class="space-y-4">
-                <h2 class="card-name text-xl font-bold">${job.cardName}</h2>
-                <p class="card-job text-gray-500">${job.cardJob}</p>
+                <h2 class="card-name text-2xl font-bold text-[#002c5c]">${job.cardName}</h2>
+                <p class="card-job text-gray-500 text-xl mt-1">${job.cardJob}</p>
                 <p class="card-salary text-gray-500">${job.cardSalary}</p>
                 <button class="card-status bg-[#EEF4FF] font-bold py-2 px-4">${job.cardStatus}</button>
                 <p class="card-description to-gray-600">${job.cardDescription}</p>
@@ -185,7 +208,7 @@ function displayFilteredJobs(jobs) {
             </div>  
         `;
         filteredJobsContainer.appendChild(jobElement);
-    }};
+}};
 
 function displayRejectedJobs(jobs) {
     filteredJobsContainer.innerHTML = "";  
@@ -194,8 +217,8 @@ function displayRejectedJobs(jobs) {
         jobElement.classList.add("bg-white", "p-4", "my-4", "space-y-4", "flex", "flex-col", "md:flex-row", "md:justify-between");
         jobElement.innerHTML = `
             <div class="space-y-4">
-                <h2 class="card-name text-xl font-bold">${job.cardName}</h2>
-                <p class="card-job text-gray-500">${job.cardJob}</p>
+                <h2 class="card-name text-2xl font-bold text-[#002c5c]">${job.cardName}</h2>
+                <p class="card-job text-gray-500 text-xl mt-1">${job.cardJob}</p>
                 <p class="card-salary text-gray-500">${job.cardSalary}</p>
                 <button class="card-status bg-[#EEF4FF] font-bold py-2 px-4">${job.cardStatus}</button>
                 <p class="card-description to-gray-600">${job.cardDescription}</p>
