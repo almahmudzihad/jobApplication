@@ -142,9 +142,9 @@ mainContainer.addEventListener("click", function(event) {
    } 
     rejected = rejected.filter(job => job.cardName != cardInfo.cardName);
     if(currentStatus == 'rejected-btn'){
-        displayRejectedJobs(rejected);//onchnge
+        displayRejectedJobs(rejected);
     }
-    
+    showNoJobsMessage()
     totaljob();
     }
     else if (event.target.classList.contains("card-rejected-btn")) { //rejected button click
@@ -183,6 +183,7 @@ mainContainer.addEventListener("click", function(event) {
    
    
         totaljob();
+        showNoJobsMessage()
         
     }
 });
