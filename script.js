@@ -186,8 +186,9 @@ mainContainer.addEventListener("click", function(event) {
         showNoJobsMessage()
         
     }
+updatetotal();
 });
-updatetotal()
+
 
 function displayFilteredJobs(jobs) {
     filteredJobsContainer.innerHTML = "";  
