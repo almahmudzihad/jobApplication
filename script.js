@@ -187,7 +187,7 @@ mainContainer.addEventListener("click", function(event) {
         
     }
 });
-
+updatetotal()
 
 function displayFilteredJobs(jobs) {
     filteredJobsContainer.innerHTML = "";  
